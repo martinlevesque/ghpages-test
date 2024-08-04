@@ -1,1 +1,39 @@
-<div>hello</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX Request Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #response {
+            white-space: pre-wrap;
+            background-color: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>AJAX Request Example</h1>
+    <button id="fetchButton">Fetch Data</button>
+    <pre id="response"></pre>
+
+    <script>
+        document.getElementById('fetchButton').addEventListener('click', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://nanode-node-test-app.nanode.dev/', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var jsonResponse = JSON.parse(xhr.responseText);
+                    document.getElementById('response').textContent = JSON.stringify(jsonResponse, null, 2);
+                }
+            };
+            xhr.send();
+        });
+    </script>
+</body>
+</html>
+
