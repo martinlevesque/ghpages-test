@@ -20,6 +20,7 @@
     <h1>AJAX Request Example</h1>
     <button id="fetchButton">Fetch Data</button>
     <pre id="response"></pre>
+    <div>Random Number: <span id="randomNumber"></span></div>
 
     <script>
         document.getElementById('fetchButton').addEventListener('click', function() {
@@ -27,8 +28,10 @@
             xhr.open('GET', 'https://nanode-node-test-app.nanode.dev/', true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    var jsonResponse = JSON.parse(xhr.responseText);
+                    const jsonResponse = JSON.parse(xhr.responseText);
+                    const randomNumber = jsonResponse.randomNumber;
                     document.getElementById('response').textContent = JSON.stringify(jsonResponse, null, 2);
+                    document.getElementById('randomNumber').textContent = randomNumber;
                 }
             };
             xhr.send();
